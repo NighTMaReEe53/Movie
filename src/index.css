@@ -1,0 +1,174 @@
+/* ? TailWind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --boxBG: #2B2B38;
+  --buttonBg: #F74346;
+  --whiteColor: #F1F1F1;
+  --iconColor: #4A4B56;
+  --linear: linear-gradient(#161621, #161621);
+  --BodyBg: #161621;
+  --border: rgba(63, 63, 70, .4);
+  --trans: 0.5s ease;
+  --swiper-navigation-size: 22px;
+  --bgSidebar: rgba(43, 43, 56, 0.2901960784);
+  --scrollBack: transparent;
+  --showText: #f1f1f1;
+  --boxShadow: #FFF;
+}
+
+::selection {
+  display: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--boxShadow);
+  border-radius: 30px;
+  transition: var(--trans);
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--scrollBack);
+}
+
+::-webkit-scrollbar-thumb:active {
+  cursor: grab;
+  background-color: var(--buttonBg);
+}
+
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--BodyBg);
+}
+
+.app {
+  width: 100%;
+}
+
+.right__content {
+  padding-left: 60px;
+  overflow: hidden;
+  transition: var(--trans);
+}
+
+@media(max-width:767px) {
+  .right__content {
+    padding-left: 0px;
+  }
+}
+
+.main-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+
+  h3,
+  div {
+    color: var(--whiteColor);
+    font-size: 32px;
+
+    @media(max-width:767px) {
+      font-size: 22px;
+    }
+
+    margin-bottom: 10px;
+    width: fit-content;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 80%;
+      background-color: var(--whiteColor);
+      height: 2px;
+      bottom: 0px;
+      left: 0px;
+      border-radius: 30px;
+    }
+
+    &::after {
+      border-radius: 30px;
+      content: "";
+      position: absolute;
+      width: 50%;
+      background-color: var(--buttonBg);
+      height: 2px;
+      bottom: -8px;
+      left: 0px;
+    }
+
+    span {
+      text-transform: uppercase;
+      color: var(--buttonBg);
+    }
+  }
+}
+
+.btn {
+  width: fit-content;
+  background-color: var(--buttonBg);
+  color: var(--whiteColor);
+  padding: 7px;
+  border-radius: 6px;
+  opacity: 0.5;
+  transition: var(--trans);
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.title {
+  font-weight: bold;
+  color: var(--whiteColor);
+  font-size: 25px;
+  margin-block: 10px;
+}
+
+.main-app {
+  position: relative;
+
+  .main-img {
+    position: absolute;
+    top: -200px;
+    right: 0;
+    z-index: -1;
+    width: 700px;
+    height: 700px;
+    object-fit: cover;
+    @media(max-width:767px) {
+      width: 100%;
+      height: 700px;
+    }
+    opacity: 0.1;
+  }
+}
+
+
+@media(prefers-color-scheme: light) {
+  :root {
+    --boxBG: rgb(255, 255, 255, 90%);
+    --buttonBg: #F74346;
+    --whiteColor: #1f1f1f;
+    --iconColor: #4A4B56;
+    --linear: linear-gradient(#FFF, #f6f6f6);
+    --BodyBg: #f6f6f6;
+    --border: rgba(202, 202, 202, .518);
+    --trans: 0.5s ease;
+    --swiper-navigation-size: 22px;
+    --bgSidebar: rgba(43, 43, 56, 0.2901960784);
+    --scrollBack: transparent;
+    --showText: #f1f1f1;
+    --boxShadow: #F74346;
+  }
+}

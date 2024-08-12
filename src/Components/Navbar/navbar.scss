@@ -1,0 +1,37 @@
+.navbar {
+  span {
+    color: var(--whiteColor);
+    cursor: pointer;
+    transition: var(--trans);
+    &:hover {
+      color: var(--buttonBg);
+    }
+  }
+  .search {
+    span {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    input {
+      background-color: var(--boxBG);
+      padding: 10px 15px 10px 35px;
+      width: 300px;
+      outline: none;
+      border: 1px solid var(--border);
+      caret-color: var(--whiteColor);
+      color: var(--whiteColor);
+      border-radius: 4px;
+      transition: var(--trans);
+      &:focus {
+        box-shadow: 0 0 5px var(--boxShadow) inset;
+        border: none;
+      }
+      &:focus::placeholder {
+        transition: var(--trans);
+        opacity: 0;
+      }
+    }
+  }
+}

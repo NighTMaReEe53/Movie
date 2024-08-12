@@ -1,0 +1,5 @@
+.CLONED {
+  &::before {
+    box-shadow: 0px -750px 1000px var(--BodyBg) inset !important;
+  }
+}
