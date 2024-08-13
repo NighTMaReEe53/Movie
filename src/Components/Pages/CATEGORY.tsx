@@ -5,11 +5,14 @@ import { Link, useParams } from "react-router-dom";
 import "./category.scss";
 import { useDispatch } from "react-redux";
 import { ADD_MOVIE } from "../RTK/SLICES/Movie_Slice";
+import Skeletion from "../SKELETON/Skeletion";
 
 const CATEGORY = () => {
   const { ID } = useParams();
   const [count, setCount] = useState(1);
   const [movie, setMovie] = useState([]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
   const GET_MOVIES = async () => {
@@ -18,6 +21,15 @@ const CATEGORY = () => {
     );
     const myData = await res.json();
     setMovie(myData.results);
+  };
+
+  const GET_NAME_MOVIE = async () => {
+    const res = await fetch(
+      "https://api.themoviedb.org/3/genre/movie/list?language=en?&api_key=82ad1a9e357bc59d597d6b1254ba5ae2&with_genres=28"
+    );
+    const myData = await res.json();
+
+    setData(myData.genres);
   };
 
   const MY_MOVIE = movie.map(
@@ -71,20 +83,37 @@ const CATEGORY = () => {
       top: 0,
       behavior: "smooth",
     });
+    GET_NAME_MOVIE();
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   }, [ID, count]);
 
+  const Filter_Data = data
+    .filter((el: { id: number | string }) => el.id == ID)
+    .map((el: { name: string }) => <span key={el.name}>{el.name}</span>);
+
   return (
-    <div className="movie-content px-3">
-      {MY_MOVIE}
-      <div className="mx-auto my-3 flex gap-2">
-        {count > 1 && (
-          <button className="btn" onClick={() => setCount(count - 1)}>
-            Previous Page
+    <div className="px-2 relative">
+      <img src="../Image/item.png" className="bottom-right" alt="" />
+
+      <div className="main-title margin">
+        <div>
+          <h2>{Filter_Data} Movie`s</h2>
+        </div>
+      </div>
+      <div className="movie-content">
+        {loading ? <Skeletion /> : MY_MOVIE}
+        <div className="mx-auto my-3 flex gap-2">
+          {count > 1 && (
+            <button className="btn prev" onClick={() => setCount(count - 1)}>
+              Previous
+            </button>
+          )}
+          <button className="load btn" onClick={() => setCount(count + 1)}>
+            {movie.length < 1 ? "Loading..." : "Next"}
           </button>
-        )}
-        <button className="load btn" onClick={() => setCount(count + 1)}>
-          {movie.length < 1 ? "Loading..." : "Next Page"}
-        </button>
+        </div>
       </div>
     </div>
   );

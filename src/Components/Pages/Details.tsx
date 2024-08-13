@@ -17,6 +17,7 @@ import ReactPlayer from "react-player";
 import Movie from "../Movies/Movie";
 import { useDispatch } from "react-redux";
 import { ADD_MOVIE } from "../RTK/SLICES/Movie_Slice";
+import Skeleton from "react-loading-skeleton";
 
 interface IPROPS {
   backdrop_path?: string | undefined;
@@ -34,6 +35,7 @@ const Details = () => {
   const [movie, setMovie] = useState<IPROPS>();
   const [video, setVideo] = useState([]);
   const [cast, setCast] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const MOVIE_CLONE = { ...movie };
 
@@ -78,10 +80,15 @@ const Details = () => {
     .map((el: { key: string; id: number }) => (
       <SwiperSlide key={el.id}>
         <div className="box-video">
-          <ReactPlayer
-            style={{ width: "100%" }}
-            url={`https://www.youtube.com/watch?v=${el.key}`}
-          />
+          {loading ? (
+            <Skeleton width={300} height={300} />
+          ) : (
+            <ReactPlayer
+              style={{ width: "100%" }}
+              url={`https://www.youtube.com/watch?v=${el.key}`}
+              controls={true}
+            />
+          )}
         </div>
       </SwiperSlide>
     ));
@@ -89,7 +96,11 @@ const Details = () => {
     .filter((_, indx) => indx < 10)
     .map((el: { name: string; profile_path: string }, indx) => (
       <div className={`item item-${indx + 1}`} key={el.name}>
-        <img src={`https://image.tmdb.org/t/p/w500/${el.profile_path}`} />
+        {el.profile_path ? (
+          <img src={`https://image.tmdb.org/t/p/w500/${el.profile_path}`} />
+        ) : (
+          <Skeleton circle width={100} height={100} className="Item-skeleton" />
+        )}
         <h6>{el.name.slice(0, 10)}...</h6>
       </div>
     ));
@@ -101,10 +112,13 @@ const Details = () => {
       top: 0,
       behavior: "smooth",
     });
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
   }, [MovieID]);
 
   return (
-    <div className="info-details  px-3">
+    <div className="info-details flex justify-center px-3">
       <div
         className="container flex gap-2 p-3 rounded-md"
         style={{
@@ -130,24 +144,32 @@ const Details = () => {
                 <Star size={20} color="#ffc107" />
                 {movie?.vote_average?.toFixed(2)}
               </span>
+              <span>-</span>
               <div className="date" style={{ opacity: 1 }}>
-                - {movie?.release_date?.slice(0, 4)}
+                {movie?.release_date?.slice(0, 4)}
               </div>
             </div>
             <div className="icons flex gap-2">
-              <Link to={`/`}>
-                <Heart size={20} />
+              <Link to={`/`} className="flex gap-2 items-center">
+                {/* <Heart size={20} /> */}
+                <Heart size={17} /> Favourite
               </Link>
               <Link
                 to={`/watchlist`}
                 onClick={() => dispatch(ADD_MOVIE(MOVIE_CLONE))}
+                className="btn"
               >
-                <Eye size={20} />
+                {/* <Eye size={20} /> */}
+                <button className="flex gap-2 items-center">
+                  <Eye size={17} /> WatchList
+                </button>
               </Link>
             </div>
           </div>
           <div className="category">Category : {MY_GENERS}</div>
-          <p className="discription">Desciption : {movie?.overview}</p>
+          <p className="discription">
+            <span>Desciption : </span> {movie?.overview}
+          </p>
           <div className="made">Directed By : {GENERATE_MOVIE}</div>
           <h2 className="title">Trailer & Video`s : </h2>
           {/* Video's */}

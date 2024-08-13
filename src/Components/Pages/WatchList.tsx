@@ -52,6 +52,7 @@ const WatchList = () => {
 
   return (
     <div className="watch-content p-3 ">
+      <img src="./Image/watchlist.png" className="bottom-right" alt="" />
       <div className="main-title flex justify-between items-center">
         <div className="flex items-center gap-2">
           <h2>

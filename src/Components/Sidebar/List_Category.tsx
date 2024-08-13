@@ -13,7 +13,6 @@ const List_Category = () => {
     return setCategory(MyData.genres);
   };
 
-  console.log(category);
 
   useEffect(() => {
     GET_CATEGORY();

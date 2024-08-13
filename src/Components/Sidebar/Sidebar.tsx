@@ -13,8 +13,10 @@ const Sidebar = ({
   function Toggle() {
     if (addClass) {
       document.querySelector(".sidebar")?.classList.add("show");
+      document.body.classList.add("body-hidden")
     } else {
       document.querySelector(".sidebar")?.classList.remove("show");
+      document.body.classList.remove("body-hidden");
     }
   }
 

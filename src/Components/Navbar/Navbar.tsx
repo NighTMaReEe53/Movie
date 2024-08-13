@@ -28,7 +28,7 @@ const Navbar = ({ handleClick }: { handleClick: () => void }) => {
   };
 
   return (
-    <nav className="navbar p-3 flex justify-center md:justify-between">
+    <nav className="navbar p-3 flex justify-center md:justify-around">
       <div className="container flex justify-between w-full items-center">
         <span onClick={handleClick}>
           <Menu size={30} />
@@ -48,7 +48,11 @@ const Navbar = ({ handleClick }: { handleClick: () => void }) => {
           />
         </form>
         {movie.length > 0 && (
-          <SearchComponent DATA={movie} HANLDEMOVIE={hanldeLink} />
+          <SearchComponent
+            DATA={movie}
+            HANLDEMOVIE={hanldeLink}
+            movie={movie}
+          />
         )}
       </div>
     </nav>
