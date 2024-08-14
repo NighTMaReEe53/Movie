@@ -3,8 +3,8 @@
     display: flex;
     justify-content: center;
   }
-   .react-loading-skeleton {
-    @media(max-width:992px) {
+  .react-loading-skeleton {
+    @media (max-width: 992px) {
       width: 50px !important;
       height: 50px !important;
       margin-bottom: 6px;
@@ -13,6 +13,7 @@
   .container {
     position: relative;
     border-radius: 10px;
+    transition: var(--trans);
     .watching-tv {
       position: absolute;
       bottom: 0;
@@ -29,7 +30,7 @@
     }
 
     z-index: 1;
-    @media (max-width: 767px) {
+    @media (max-width: 992px) {
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -64,7 +65,7 @@
     }
     .text-info {
       h2 {
-        width: 650px;
+        width: fit-content;
         font-weight: bold;
         font-size: 40px;
         @media (max-width: 767px) {
@@ -219,41 +220,48 @@
     flex-direction: column;
     align-items: center;
     left: 100%;
-    animation: MOVING 30s linear infinite;
+    animation: MOVING 50s linear infinite;
     &.item-1 {
-      animation-delay: 30s / 10 * (10 - 1) * -1;
+      animation-delay: 50s / 10 * (10 - 1) * -1;
     }
     &.item-2 {
-      animation-delay: 30s / 10 * (10 - 2) * -1;
+      animation-delay: 50s / 10 * (10 - 2) * -1;
     }
     &.item-3 {
-      animation-delay: 30s / 10 * (10 - 3) * -1;
+      animation-delay: 50s / 10 * (10 - 3) * -1;
     }
     &.item-4 {
-      animation-delay: 30s / 10 * (10 - 4) * -1;
+      animation-delay: 50s / 10 * (10 - 4) * -1;
     }
     &.item-5 {
-      animation-delay: 30s / 10 * (10 - 5) * -1;
+      animation-delay: 50s / 10 * (10 - 5) * -1;
     }
     &.item-6 {
-      animation-delay: 30s / 10 * (10 - 6) * -1;
+      animation-delay: 50s / 10 * (10 - 6) * -1;
     }
     &.item-7 {
-      animation-delay: 30s / 10 * (10 - 7) * -1;
+      animation-delay: 50s / 10 * (10 - 7) * -1;
     }
     &.item-8 {
-      animation-delay: 30s / 10 * (10 - 8) * -1;
+      animation-delay: 50s / 10 * (10 - 8) * -1;
     }
     &.item-9 {
-      animation-delay: 30s / 10 * (10 - 9) * -1;
+      animation-delay: 50s / 10 * (10 - 9) * -1;
     }
     &.item-10 {
-      animation-delay: 30s / 10 * (10 - 10) * -1;
+      animation-delay: 50s / 10 * (10 - 10) * -1;
     }
     img {
       width: 100px;
       height: 100px;
-      @media (max-width: 992px) {
+      border: 3px solid var(--boxShadow);
+      padding: 3px;
+      @media(min-width:768px) and (max-width:992px) {
+        max-width: 70px;
+        height: 70px;
+      }
+      @media (min-width: 0px) and (max-width: 767px) {
+        border: 2px solid var(--boxShadow);
         width: 50px;
         height: 50px;
         max-width: 50px;

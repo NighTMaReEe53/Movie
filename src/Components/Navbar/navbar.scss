@@ -1,4 +1,43 @@
 .navbar {
+  transition: var(--trans);
+
+  &.navbar__fixed {
+    transition: var(--trans);
+    animation: fromToping 0.3s linear forwards;
+
+    &.addition-form {
+      .search {
+        right: 200px;
+      }
+    }
+
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    background-color: var(--transparent);
+    backdrop-filter: blur(5px);
+    height: 60px;
+    .container {
+      width: 90%;
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+      @media (min-width: 768px) and (max-width: 992px) {
+        width: 85%;
+      }
+      .search {
+        input {
+          background-color: transparent;
+          border: 1px solid var(--showText);
+        }
+      }
+    }
+  }
+
+  &.addition-form {
+    width: 100%;
+  }
+
   span {
     color: var(--whiteColor);
     cursor: pointer;
@@ -8,11 +47,13 @@
     }
   }
   .search {
-    span {
+    transition: var(--trans);
+    > span {
       position: absolute;
       left: 10px;
       top: 50%;
       transform: translateY(-50%);
+      transition: var(--trans);
     }
     input {
       background-color: var(--boxBG);
@@ -24,14 +65,37 @@
       color: var(--whiteColor);
       border-radius: 4px;
       transition: var(--trans);
+      &::placeholder {
+        color: var(--whiteColor);
+      }
+      &::selection {
+        display: block;
+        background-color: var(--Selection);
+        color: var(--showText);
+      }
       &:focus {
         box-shadow: 0 0 5px var(--boxShadow) inset;
         border: none;
+        + span {
+          opacity: 0;
+          visibility: hidden;
+        }
+        padding-left: 15px;
       }
       &:focus::placeholder {
         transition: var(--trans);
         opacity: 0;
       }
     }
+  }
+}
+
+// Animation
+@keyframes fromToping {
+  from {
+    top: -72px;
+  }
+  to {
+    top: 0px;
   }
 }

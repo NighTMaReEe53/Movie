@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const MOVIE_SLICE = createSlice({
-  name: "MOVIESLICE",
+const FAVOURITE_SLICE = createSlice({
+  name: "FAVOURITE_SLICE",
   initialState: [],
   reducers: {
-    ADD_MOVIE: (
+    ADD_MOVIE_Favourite: (
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       state: any,
       action: {
@@ -26,11 +26,11 @@ const MOVIE_SLICE = createSlice({
       } else {
         state.push(action.payload);
       }
-      window.localStorage.setItem("pageMovie", JSON.stringify(state));
+      window.localStorage.setItem("pageFavourite", JSON.stringify(state));
     },
   },
 });
 
-export const { ADD_MOVIE } = MOVIE_SLICE.actions;
+export const { ADD_MOVIE_Favourite } = FAVOURITE_SLICE.actions;
 
-export default MOVIE_SLICE.reducer;
+export default FAVOURITE_SLICE.reducer;

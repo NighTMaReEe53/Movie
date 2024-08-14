@@ -2,35 +2,32 @@ import "./Sidebar.scss";
 import List_Category from "./List_Category";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { closeMenu } from "../RTK/SLICES/Sidebar_Slice";
 
-const Sidebar = ({
-  addClass,
-  handleClick,
-}: {
-  addClass: boolean;
-  handleClick: () => void;
-}) => {
-  function Toggle() {
-    if (addClass) {
-      document.querySelector(".sidebar")?.classList.add("show");
-      document.body.classList.add("body-hidden")
-    } else {
-      document.querySelector(".sidebar")?.classList.remove("show");
-      document.body.classList.remove("body-hidden");
-    }
-  }
+const Sidebar = () => {
+  const MY_Redux = useSelector(
+    (state: { sidebar: { isOpen: boolean } }) => state.sidebar
+  );
+
+  const dispatch = useDispatch();
+
+  const closeTheMenu = () => dispatch(closeMenu());
 
   useEffect(() => {
-    Toggle();
-  }, [addClass]);
+    document.body.style.overflow = `${MY_Redux.isOpen ? "hidden" : "auto"}`;
+  }, [MY_Redux.isOpen]);
 
   return (
-    <nav className="sidebar">
+    <nav
+      className={`sidebar ${MY_Redux.isOpen ? "show" : ""}`}
+      onClick={closeTheMenu}
+    >
       <img src="./1.webp" className="edition" alt="" />
-      <div className="close" onClick={handleClick}>
+      <div className="close" onClick={closeTheMenu}>
         X
       </div>
-      <div className="container p-4">
+      <div className="container p-3">
         <Link
           to={"/"}
           className="text-3xl flex items-center font-bold mb-3 uppercase gap-2"

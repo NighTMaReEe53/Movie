@@ -1,26 +1,35 @@
 import { Heart, Star } from "lucide-react";
 import "./Watch.scss";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { ADD_MOVIE_Favourite } from "../RTK/SLICES/Favourite_Slice";
 
 const WatchList = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const GET_ITEM_FROM_LOCAL: any = localStorage.getItem("pageMovie");
+
+  const dispatch = useDispatch();
 
   const GET_DATA_LOCAL: [
     {
-      backdrop_path: string | null;
-      name?: string | null;
-      title?: string | null;
-      id?: number | null;
-      poster_path?: string | null;
-      overview?: string | null;
-      vote_average?: number | null;
+      backdrop_path: string;
+      name?: string;
+      title?: string;
+      id?: number;
+      poster_path?: string;
+      overview?: string;
+      vote_average?: number;
     }
   ] = JSON.parse(GET_ITEM_FROM_LOCAL);
 
   const MY_DATA = GET_DATA_LOCAL.map((el) => (
     <div className="movie-box" key={el.id}>
       <div className="show">
-        <h2>{el.title ? el.title.slice(0, 15) + "..." : el.name?.slice(0, 15) + "..."}</h2>
+        <h2>
+          {el.title
+            ? el.title.slice(0, 15) + "..."
+            : el.name?.slice(0, 15) + "..."}
+        </h2>
         <p>{el.overview?.slice(0, 40)}...</p>
         <Link to={`/${el.id}`} className="btn cursor-pointer">
           Details
@@ -36,7 +45,10 @@ const WatchList = () => {
         </div>
         <div className="details flex gap-1">
           <span>
-            <Heart size={18} />
+            <Heart
+              size={18}
+              onClick={() => dispatch(ADD_MOVIE_Favourite(el))}
+            />
           </span>
         </div>
       </div>

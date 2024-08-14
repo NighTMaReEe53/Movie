@@ -36,7 +36,7 @@ const Search = ({
           <Link
             to={`/${el.id}`}
             onClick={HANLDEMOVIE}
-            className="box-search"
+            className={`box-search`}
             key={el.id}
           >
             {el.poster_path ? (
@@ -53,32 +53,17 @@ const Search = ({
             </div>
           </Link>
         ) : (
-          <SEARCH_SKELETON />
+            <SEARCH_SKELETON />
         )}
-        {/* <Link
-          to={`/${el.id}`}
-          onClick={HANLDEMOVIE}
-          className="box-search"
-          key={el.id}
-        >
-          {el.poster_path ? (
-            <img src={`https://image.tmdb.org/t/p/w500/${el.poster_path}`} />
-          ) : (
-            <Skeleton width={50} height={50} />
-          )}
-          <div className="text">
-            <h2>{el.title.slice(0, 15)}...</h2>
-            <div className="stars flex gap-2 items-center">
-              <Star size={17} color="#ffc107" />
-              <div className="rate">{el.vote_average.toFixed(2)}</div>
-            </div>
-          </div>
-        </Link> */}
       </>
     );
   });
 
-  return <div className="content">{MY_DATA}</div>;
+  return (
+    <div className={`content`}>
+      {MY_DATA}
+    </div>
+  );
 };
 
 export default Search;

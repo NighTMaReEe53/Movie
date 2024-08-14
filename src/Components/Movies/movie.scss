@@ -4,7 +4,7 @@
 
 .box {
   min-width: 200px;
-  min-height: 330px;
+  min-height: 300px;
   border-radius: 4px;
   background-color: var(--BodyBg);
   padding: 4px;
@@ -32,6 +32,12 @@
       a {
         background-color: #fff3;
         color: var(--showText);
+      }
+    }
+    .text {
+      h2 {
+        color: var(--showText);
+        opacity: 1;
       }
     }
   }
@@ -139,7 +145,7 @@
   }
   .stars {
     position: absolute;
-    bottom: 45px;
+    bottom: 30px;
     left: 0;
     width: 100%;
     padding: 0 5px;
@@ -149,8 +155,9 @@
     color: var(--whiteColor);
   }
   .text {
-    position: relative;
+    position: absolute;
     z-index: 10;
+    bottom: 10px;
     h2 {
       color: var(--whiteColor);
       opacity: 0.7;

@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { ADD_MOVIE } from "../RTK/SLICES/Movie_Slice";
 import Skeletion from "../SKELETON/Skeletion";
 import Skeleton from "react-loading-skeleton";
+import { ADD_MOVIE_Favourite } from "../RTK/SLICES/Favourite_Slice";
 
 interface IMOVIE_PROPS {
   API: string;
@@ -28,6 +29,8 @@ interface IMOVIE_PROPS {
 interface MOVIE {
   id: number;
   backdrop_path: string;
+  original_title?: string;
+  original_language?: string;
   poster_path: string;
   title: string;
   vote_average: number;
@@ -107,9 +110,15 @@ const Movie = ({ API, TITLE, ICON, NEED }: IMOVIE_PROPS) => {
               <SwiperSlide key={el.id}>
                 <div className="box">
                   <div className="show">
-                    <h2>
+                    <h2
+                      style={
+                        el.original_language === "ar"
+                          ? { direction: "rtl" }
+                          : { direction: "ltr" }
+                      }
+                    >
                       {el.title
-                        ? el.title.slice(0, 15) + "..."
+                        ? el.original_title?.slice(0, 15) + "..."
                         : el.name?.slice(0, 15) + "..."}
                     </h2>
                     <p>{el.overview?.slice(0, 40)}...</p>
@@ -138,7 +147,10 @@ const Movie = ({ API, TITLE, ICON, NEED }: IMOVIE_PROPS) => {
                       </span>
                     </div>
                     <div className="details flex gap-1">
-                      <Link to={"/"}>
+                      <Link
+                        to={"/favourite"}
+                        onClick={() => dispatch(ADD_MOVIE_Favourite(el))}
+                      >
                         <Heart size={15} />
                       </Link>
                       <Link to={`/watchlist`} onClick={() => handleLink(el)}>
@@ -146,10 +158,16 @@ const Movie = ({ API, TITLE, ICON, NEED }: IMOVIE_PROPS) => {
                       </Link>
                     </div>
                   </div>
-                  <div className="text px-1 mt-1">
-                    <h2>
+                  <div className="text px-1 mt-1" style={{ width: "95%" }}>
+                    <h2
+                      style={
+                        el.original_language === "ar"
+                          ? { direction: "rtl", textAlign: "right" }
+                          : { direction: "ltr" }
+                      }
+                    >
                       {el.title
-                        ? el.title.slice(0, 15) + "..."
+                        ? el.original_title?.slice(0, 15) + "..."
                         : el.name?.slice(0, 15) + "..."}
                     </h2>
                   </div>

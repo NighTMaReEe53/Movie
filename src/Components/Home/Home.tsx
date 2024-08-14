@@ -14,7 +14,6 @@ const Home = () => {
         TYPE_MOVIE="Popular"
         API="https://api.themoviedb.org/3/trending/all/week?language=en-US&api_key=82ad1a9e357bc59d597d6b1254ba5ae2"
       />
-
       <Movie
         NEED={true}
         TITLE={
@@ -44,6 +43,16 @@ const Home = () => {
         }
         TYPE_MOVIE="Popular"
         API="https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1&api_key=82ad1a9e357bc59d597d6b1254ba5ae2"
+      />
+      <Movie
+        NEED={true}
+        TITLE={
+          <h2>
+            Arabic <span>Movie's</span>{" "}
+          </h2>
+        }
+        TYPE_MOVIE="Popular"
+        API="https://api.themoviedb.org/3/discover/movie?api_key=82ad1a9e357bc59d597d6b1254ba5ae2&language=en-US&sort_by=popularity.desc&page=1&primary_release_year=2024&with_original_language=ar"
       />
     </div>
   );

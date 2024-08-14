@@ -3,17 +3,25 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import "./category.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ADD_MOVIE } from "../RTK/SLICES/Movie_Slice";
 import Skeletion from "../SKELETON/Skeletion";
+import { Decrement, Increment } from "../RTK/SLICES/Sidebar_Slice";
+import { ADD_MOVIE_Favourite } from "../RTK/SLICES/Favourite_Slice";
 
 const CATEGORY = () => {
   const { ID } = useParams();
-  const [count, setCount] = useState(1);
+  // const [count, setCount] = useState(1);
   const [movie, setMovie] = useState([]);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+
+  const MY_Redux = useSelector(
+    (state: { sidebar: { count: number } }) => state.sidebar
+  );
+
+  const { count } = MY_Redux;
 
   const GET_MOVIES = async () => {
     const res = await fetch(
@@ -62,7 +70,10 @@ const CATEGORY = () => {
             <div className="rate font-medium">{el.vote_average.toFixed(2)}</div>
           </div>
           <div className="details flex gap-1">
-            <Link to={`/`}>
+            <Link
+              to={`/favourite`}
+              onClick={() => dispatch(ADD_MOVIE_Favourite(el))}
+            >
               <Heart size={18} />
             </Link>
             <Link to={`/watchlist`} onClick={() => dispatch(ADD_MOVIE(el))}>
@@ -102,16 +113,16 @@ const CATEGORY = () => {
           <h2>{Filter_Data} Movie`s</h2>
         </div>
       </div>
-      <div className="movie-content">
+      <div className="movie-content relative">
         {loading ? <Skeletion /> : MY_MOVIE}
-        <div className="mx-auto my-3 flex gap-2">
+        <div className="mx-auto btns my-3 flex gap-2">
           {count > 1 && (
-            <button className="btn prev" onClick={() => setCount(count - 1)}>
+            <button className="btn prev" onClick={() => dispatch(Decrement())}>
               Previous
             </button>
           )}
-          <button className="load btn" onClick={() => setCount(count + 1)}>
-            {movie.length < 1 ? "Loading..." : "Next"}
+          <button className="load btn" onClick={() => dispatch(Increment())}>
+            {loading ? "Loading..." : "Next"}
           </button>
         </div>
       </div>
@@ -120,3 +131,5 @@ const CATEGORY = () => {
 };
 
 export default CATEGORY;
+
+// setCount(count - 1)}

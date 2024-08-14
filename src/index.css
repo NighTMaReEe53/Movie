@@ -4,6 +4,7 @@
 @tailwind utilities;
 
 :root {
+  --Selection: #161621;
   --boxBG: #2B2B38;
   --buttonBg: #F74346;
   --whiteColor: #F1F1F1;
@@ -20,11 +21,11 @@
   --directionColor: #434343;
   --bgFlah: #161621;
   --flash: #525252;
+  --transparent: transparent;
 }
 
 ::selection {
-  background-color: #161621;
-  color: var(--showText);
+  display: none;
 }
 
 html {
@@ -51,6 +52,7 @@ html {
 }
 
 
+
 body {
   font-family: "Roboto", sans-serif;
   background-color: var(--BodyBg);
@@ -60,6 +62,10 @@ body {
       overflow: hidden;
     }
   }
+}
+
+img {
+  pointer-events: none;
 }
 
 .app {
@@ -191,6 +197,14 @@ body {
   }
 }
 
+@media(min-width:767px) {
+  body {
+    overflow: auto !important;
+  }
+}
+
+
+/* ? addition */
 
 @media(prefers-color-scheme: light) {
   :root {
@@ -210,5 +224,6 @@ body {
     --directionColor: #434343;
     --bgFlah: #EEE;
     --flash: #FFFF;
+    --transparent: #FFF;
   }
 }

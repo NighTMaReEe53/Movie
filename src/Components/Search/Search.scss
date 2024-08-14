@@ -1,14 +1,10 @@
 .content {
-  position: fixed;
+  position: absolute;
   width: 300px;
   height: 300px;
   overflow-y: scroll;
-  top: 63px;
-  right: 10px;
-  @media(min-width:768px) and (max-width:992px) {
-    right: 77px;
-
-  }
+  top: 55px;
+  right: 0px;
   z-index: 20;
   background-color: var(--boxBG);
   border-radius: 4px;
